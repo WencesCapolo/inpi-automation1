@@ -1,0 +1,93 @@
+# API Keys and Secrets
+*.env
+.env
+.env.local
+.env.production
+config.json
+secrets.json
+api_keys.txt
+.streamlit/secrets.toml
+secrets.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary Files
+*.tmp
+temp_*
+*.temp
+*.log
+
+# Data Files (potentially sensitive)
+part_data.json
+*.pdf
+*.xls
+*.xlsx
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Docker
+**/__pycache__/
+**/*.py[cod]
+*.db
+*.sqlite3
+*.log
+
+# VSCode extensions
+.history/
+*.code-workspace

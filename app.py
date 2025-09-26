@@ -27,11 +27,17 @@ except ImportError as e:
 # Insert helper just after existing imports (keep rest code unchanged)
 
 def get_secret(key, default=None):
-    """Try Streamlit secrets first, then environment variables."""
+    """Try environment variables first, then Streamlit secrets."""
+    # First try environment variables (for Railway deployment)
+    env_value = os.getenv(key)
+    if env_value:
+        return env_value
+    
+    # Fallback to Streamlit secrets (for local development)
     try:
         return st.secrets[key]
     except Exception:
-        return os.getenv(key, default)
+        return default
 
 # Page configuration    
 st.set_page_config(

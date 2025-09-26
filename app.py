@@ -11,7 +11,7 @@ import requests
 import random
 import re
 from PyPDF2 import PdfReader
-import openai
+from openai import OpenAI
 import io
 from typing import cast
 
@@ -504,7 +504,7 @@ def send_emails(data):
 def process_email_batch(batch_items, start_idx, total_emails, progress_bar, status_text, campana_tag):
     """Process a single batch of emails"""
     # OpenAI configuration
-    openai.api_key = get_secret("OPENAI_API_KEY")
+    openai_client = OpenAI(api_key=get_secret("OPENAI_API_KEY"))
     
     # Brevo configuration for email sending
     BREVO_API_KEY = cast(str, get_secret("BREVO_API_KEY"))
@@ -573,7 +573,7 @@ def process_email_batch(batch_items, start_idx, total_emails, progress_bar, stat
             add_log(f"Generating email content for {item.get('Titulares', 'N/A')}")
             
             try:
-                response = openai.chat.completions.create(
+                response = openai_client.chat.completions.create(
                     model="gpt-4o-mini",
                     messages=[
                         {"role": "system", "content": "Eres un abogado experto en propiedad intelectual argentina."},

@@ -503,8 +503,32 @@ def send_emails(data):
 
 def process_email_batch(batch_items, start_idx, total_emails, progress_bar, status_text, campana_tag):
     """Process a single batch of emails"""
-    # OpenAI configuration
-    openai_client = OpenAI(api_key=get_secret("OPENAI_API_KEY"))
+    # OpenAI configuration - explicitly avoid proxy settings
+    api_key = get_secret("OPENAI_API_KEY")
+    if not api_key:
+        add_log("❌ OpenAI API key not found in environment or secrets", "error")
+        return 0, len(batch_items)
+    
+    try:
+        # Temporarily clear proxy-related env vars that might interfere
+        proxy_vars = ['HTTP_PROXY', 'HTTPS_PROXY', 'http_proxy', 'https_proxy', 'ALL_PROXY', 'all_proxy']
+        original_proxies = {}
+        for var in proxy_vars:
+            if var in os.environ:
+                original_proxies[var] = os.environ[var]
+                del os.environ[var]
+        
+        openai_client = OpenAI(
+            api_key=api_key,
+            timeout=30.0
+        )
+        
+        # Restore proxy vars
+        for var, value in original_proxies.items():
+            os.environ[var] = value
+    except Exception as client_error:
+        add_log(f"❌ Failed to initialize OpenAI client: {str(client_error)}", "error")
+        return 0, len(batch_items)
     
     # Brevo configuration for email sending
     BREVO_API_KEY = cast(str, get_secret("BREVO_API_KEY"))

@@ -9,11 +9,14 @@ import logging
 from datetime import datetime
 import requests
 import random
+import dotenv
 import re
 from PyPDF2 import PdfReader
 from openai import OpenAI
 import io
 from typing import cast
+
+dotenv.load_dotenv()
 
 # Add current directory to path to import your modules
 sys.path.append('.')
@@ -580,7 +583,7 @@ def process_email_batch(batch_items, start_idx, total_emails, progress_bar, stat
             {explicacion_legal}
 
             Instrucciones:
-            - Comienza con un saludo personalizado (usa el nombre completo del titular).
+            - Comienza con un saludo personalizado (usa el nombre completo del titular y preséntante como Nicolas Eguía).
             - Informa con precisión que su marca "{item.get("Denominacion", "N/A")}", clase {item.get("Clase", "N/A")}, ha {accion_descripcion} en el proceso de registro ante el INPI.
             - Explica brevemente qué significa una {procedimiento_tipo} basándote en el contexto legal proporcionado, mencionando el {ley_articulo}.
             - Explica las implicancias que tiene (puede afectar el registro de su marca).

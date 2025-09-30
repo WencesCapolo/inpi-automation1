@@ -99,10 +99,9 @@ def generate_email_content(record: dict) -> str:
     {explicacion_legal}
 
     Instrucciones:
-    - Comienza con un saludo personalizado (usa el nombre completo del titular).
+    - Comienza con un saludo personalizado (usa el nombre completo del titular y preséntante como Nicolas Eguía).
     - Informa con precisión que su marca "{record.get('Denominacion', 'N/A')}", clase {record.get('Clase', 'N/A')}, ha {accion_descripcion} en el proceso de registro ante el INPI.
     - Explica brevemente qué significa una {procedimiento_tipo} basándote en el contexto legal proporcionado.
-    - Menciona el artículo de la ley: {record.get('Art.Ley', 'N/A')} solo si no es N/A y explica brevemente qué significa.
     - Explica las implicancias que tiene (puede ser que no se registre la marca).
     - Presenta a Eguía Marcas y Patentes como un equipo experto en defensa de marcas con amplia experiencia en resolver {procedimiento_tipo}s.
     - Ofrece una consulta gratuita para analizar el caso sin compromiso.

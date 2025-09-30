@@ -9,14 +9,11 @@ import logging
 from datetime import datetime
 import requests
 import random
-import dotenv
 import re
 from PyPDF2 import PdfReader
 from openai import OpenAI
 import io
 from typing import cast
-
-dotenv.load_dotenv()
 
 # Add current directory to path to import your modules
 sys.path.append('.')
